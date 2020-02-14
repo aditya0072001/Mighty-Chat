@@ -4,7 +4,8 @@
     <ul v-if="username != null">
       <li  v-for="his in history" :key="his.messageId">
        <h1> {{his.message}}</h1>
-        <img :src="his._sender.profileUrl" alt="Smiley face" height="42" width="42">
+        <div v-if="his.sender.isActive == true"><img :src="his._sender.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:green"></div>
+        <div v-else><img :src="his._sender.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:red"></div>
         <h2>{{his._sender.userId}}</h2>
       </li>
     </ul>
@@ -19,7 +20,9 @@
       <ul>
       <li v-for="par in participants" :key="par">
         {{par.userId}}
-      <img :src="par.profileUrl" alt="Smiley face" height="42" width="42">
+      <!--<img :src="par.profileUrl" alt="Smiley face" height="42" width="42"><!-->
+      <div v-if="par.isActive == true"><img :src="par.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:green"></div>
+      <div v-else><img :src="par.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:red;"></div>
       </li>
     </ul>
     </h1>
@@ -193,4 +196,5 @@ li {
 a {
   color: #42b983;
 }
+
 </style>
