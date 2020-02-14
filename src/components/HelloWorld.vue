@@ -4,9 +4,9 @@
     <ul v-if="username != null">
       <li  v-for="his in history" :key="his.messageId">
        <h1> {{his.message}}</h1>
-        <div v-if="his.sender.isActive == true"><img :src="his._sender.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:green"></div>
-        <div v-else><img :src="his._sender.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:red"></div>
-        <h2>{{his._sender.userId}}</h2>
+        <div v-if="his.sender.isActive == true"><img :src="his._sender.profileUrl"  alt="Smiley face" height="42" width="42" align="right" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:green"></div>
+        <div v-else><img :src="his._sender.profileUrl"  alt="Smiley face" height="42" width="42" align="right" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:red"></div>
+        <h2 style="text-align:right; ">{{his._sender.userId}}</h2>
       </li>
     </ul>
     <h1>
@@ -16,13 +16,13 @@
     </h1>
     <h1>
       <h6>If you can't see messages enter a username</h6>
-      <h1>Online Participants</h1>
+      <h1>Participants</h1>
       <ul>
       <li v-for="par in participants" :key="par">
-        {{par.userId}}
+        <div v-if="par.isActive == true"><img :src="par.profileUrl" align="right" alt="Smiley face" height="100" width="100" style="border-style: groove; border-radius: 50%; border-size:200px; border-color:green"></div>
+      <div v-else><img :src="par.profileUrl"  alt="Smiley face" align="right" height="100" width="100" style="border-style: groove; border-radius: 50%; border-size:200px; border-color:red;"></div>
+       <h1 style="text-align:left; font-size:50px;"> {{par.userId}} </h1>
       <!--<img :src="par.profileUrl" alt="Smiley face" height="42" width="42"><!-->
-      <div v-if="par.isActive == true"><img :src="par.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:green"></div>
-      <div v-else><img :src="par.profileUrl"  alt="Smiley face" height="42" width="42" style="border-style: groove; border-radius: 100px; border-size:200px; border-color:red;"></div>
       </li>
     </ul>
     </h1>
@@ -56,7 +56,7 @@ export default {
       var sb = new SendBird({ appId: ID })
       // var his = this.history
       // console.log('this info' + this.info)
-
+      if (this.username.length === 0) { return alert('Enter username buddy and message') }
       var USER_ID = this.username// (Math.floor(Math.random() * (10000 - 0) + 0)).toString()
 
       sb.connect(USER_ID, function (user, error) {
@@ -185,16 +185,37 @@ h1, h2 {
 }
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 10px;
 }
 li {
   display: block;
-  margin: 0 5px;
-  padding: 10px;
-  border-style: groove;
+  margin: 0 0;
+  padding: 5px;
+  border-style: solid;
+  text-align: left;
 }
 a {
   color: #42b983;
+}
+
+input[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 70%;
+}
+input[type=button] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-family: monospace;
+  letter-spacing: 10px;
+  background-color: #42b983;
+  font-size: 200%;
+  text-align: center;
 }
 
 </style>
